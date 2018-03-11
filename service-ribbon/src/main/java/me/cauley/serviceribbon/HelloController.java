@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+
 /**
  * Created at 2018/3/10
  */
@@ -20,5 +22,11 @@ public class HelloController {
     public String hi(@RequestParam String name){
         LOGGER.info("Request by " + name);
         return helloService.hiService(name);
+    }
+
+    @RequestMapping("/hii")
+    public String hii(@RequestParam String name){
+        LOGGER.info("Request by " + name);
+        return helloService.hiService(name) + " at " + LocalDateTime.now();
     }
 }
