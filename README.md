@@ -1,2 +1,4 @@
 # spring-cloud-example
-init commit
+Spring could demos
+
+Reference: http://blog.csdn.net/forezp/article/details/70148833
