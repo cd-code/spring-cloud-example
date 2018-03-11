@@ -1,5 +1,6 @@
 package me.cauley.serviceribbon;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,15 @@ public class HelloService {
     @Value("${remote.service.name}")
     private String serviceName;
 
+    @HystrixCommand(fallbackMethod = "methodForFail")
     public String hiService(String name){
         LOGGER.info("Request " + serviceName + " by " + name);
         return restTemplate.getForObject("http://" + serviceName + "/hi?name=" + name, String.class);
+    }
+
+    public String methodForFail(String name){
+        String info = "[Ribbon]Got error while calling service[" + serviceName + "] with " + name;
+        LOGGER.info(info);
+        return info;
     }
 }

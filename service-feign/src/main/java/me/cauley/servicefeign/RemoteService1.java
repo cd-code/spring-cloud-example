@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Component
-@FeignClient("${remote.service.name}")
+@FeignClient(value = "${remote.service.name}", fallback = RemoteService1FallbackImpl.class)
 public interface RemoteService1 {
     @RequestMapping("/hi")
     String sayHiFromClient(@RequestParam("name") String name);
